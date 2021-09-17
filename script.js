@@ -6,9 +6,6 @@ function draw(){
 
   ctx.translate(250, 250);
   ctx.save();
-  // ctx.arc(0, 0, 150, 0, 2 * Math.PI, true);
-  // ctx.lineWidth = 10;
-  // ctx.stroke();
   ctx.scale(0.5, 0.5);
 
   //Hour marks
@@ -33,10 +30,6 @@ function draw(){
 
   ctx.restore();
 
-  ctx.beginPath();
-  ctx.arc(0, 0, 7, 0, 2 * Math.PI, true);
-  ctx.fill();
-
   const time = new Date();
   var sec = time.getSeconds();
   var min = time.getMinutes();
@@ -44,21 +37,9 @@ function draw(){
 
   ctx.save();
 
-  //Draw seconds hand
-  ctx.beginPath();
-  ctx.rotate(Math.PI / 30 * sec);
-  ctx.moveTo(0, 0);
-  ctx.lineTo(0, -110);
-  ctx.strokeStyle = 'red';
-  ctx.stroke();
-
-  ctx.restore();
-
-  ctx.save();
-
   //Draw minutes hand
   ctx.beginPath();
-  ctx.rotate(Math.PI / 30 * min);
+  ctx.rotate(Math.PI / 30 * min + Math.PI / 1800 * sec);
   ctx.moveTo(0, 0);
   ctx.lineTo(0, -100);
   ctx.lineWidth = 2;
@@ -70,11 +51,28 @@ function draw(){
 
   //Draw hours hand
   ctx.beginPath();
-  ctx.rotate(Math.PI / 6 * hour);
+  ctx.rotate(Math.PI / 6 * hour + Math.PI / 1800 * sec + Math.PI / 369 * min);
   ctx.moveTo(0, 0);
   ctx.lineTo(0, -80);
   ctx.lineWidth = 5;
   ctx.stroke();
+
+  ctx.save();
+
+  //Draw seconds hand
+  ctx.beginPath();
+  ctx.rotate(Math.PI / 30 * sec);
+  ctx.moveTo(0, 0);
+  ctx.lineTo(0, -110);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'red';
+  ctx.stroke();
+
+  ctx.restore();
+
+  ctx.beginPath();
+  ctx.arc(0, 0, 7, 0, 2 * Math.PI, true);
+  ctx.fill();
 
   window.requestAnimationFrame(draw);
 }
