@@ -51,7 +51,7 @@ function draw(){
 
   //Draw hours hand
   ctx.beginPath();
-  ctx.rotate(Math.PI / 6 * hour + Math.PI / 1800 * sec + Math.PI / 369 * min);
+  ctx.rotate(Math.PI / 6 * hour + Math.PI / 360 * min + Math.PI / 21600 * sec);
   ctx.moveTo(0, 0);
   ctx.lineTo(0, -80);
   ctx.lineWidth = 5;
